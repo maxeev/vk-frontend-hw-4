@@ -1,9 +1,10 @@
+// src/components/Feed.tsx
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPosts } from '../store/slices/postsSlice';
 import FeedItem, { Post } from './FeedItem';
 import Header from './Header';
-import axiosInstance from '../axiosInstance';
+import postsData from '../constants/post';
 import styles from '../styles/Feed.module.css';
 
 const Feed: React.FC = () => {
@@ -13,24 +14,19 @@ const Feed: React.FC = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const loadPosts = async () => {
-            try {
-                const response = await axiosInstance.get('/cdeb6c5b-1b40-4af5-a21c-8ed15f45b32d');
-                // Добавляем пустой массив комментариев к каждому посту
-                const postsWithComments = response.data.map((post: Post) => ({
-                    ...post,
-                    comments: [] 
-                }));
-                dispatch(addPosts(postsWithComments)); 
-            } catch (error) {
-                console.error('Error fetching posts:', error);
-            } finally {
+        const loadPosts = () => {
+            if (posts.length === 0) {
+                setTimeout(() => {
+                    dispatch(addPosts(postsData));
+                    setLoading(false);
+                }, 1500);
+            } else {
                 setLoading(false);
             }
         };
 
         loadPosts();
-    }, [dispatch]);
+    }, [dispatch, posts.length]);
 
     const filteredPosts = useMemo(() => {
         return posts.filter((post: Post) =>

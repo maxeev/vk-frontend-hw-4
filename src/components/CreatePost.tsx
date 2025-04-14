@@ -62,7 +62,7 @@ const CreatePost: React.FC = () => {
                     rows={4} 
                 />
                 <input
-                    type="text"
+                    type="url"
                     id="post-image" 
                     name="image" 
                     value={image}

@@ -31,10 +31,14 @@
 }
 
 .toggleButton {
-    color: #007bff;
+    background: none;
+    border: none;
+    color: blue;
     text-decoration: underline;
     cursor: pointer;
-    margin-left: 5px;
+    padding: 0; 
+    font: inherit; 
+    outline: none; 
 }
 
 .buttonContainer {

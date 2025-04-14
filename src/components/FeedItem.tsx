@@ -39,15 +39,13 @@ const FeedItem: React.FC<FeedItemProps> = ({ post }) => {
             <span>
                 {displayedBody}
                 {isLongPost && ( 
-                    <span 
-                        className={styles.toggleButton} 
-                        onClick={toggleBody} 
-                        role="button" 
-                        tabIndex={0} 
-                        onKeyPress={(e) => e.key === 'Enter' && toggleBody()} 
-                    >
-                        {isOpen ? 'see less' : 'see more'}
-                    </span>
+                    <button 
+                    className={styles.toggleButton} 
+                    onClick={toggleBody} 
+                    aria-expanded={isOpen} 
+                >
+                    {isOpen ? 'see less' : 'see more'}
+                </button>
                 )}
             </span>
             <img className={styles.img} src={post.image} alt="post" />
